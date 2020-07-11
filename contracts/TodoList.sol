@@ -22,6 +22,12 @@ contract TodoList {
     // datatype of value is Task. We're going to use id as key.
     // Solidity gives us a free tasks function to access the task variable.
 
+    event TaskCreated (
+        uint id,
+        string content,
+        bool completed
+    );
+
     // Contructor will run once at deployment.
     constructor() public {
         // The following is a default task for the todo list
@@ -31,5 +37,6 @@ contract TodoList {
     function createTask(string memory _content) public {
         taskCount++;
         tasks[taskCount] = Task(taskCount, _content, false);
+        emit TaskCreated(taskCount, _content, false);
     }
 }
